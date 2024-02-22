@@ -10,7 +10,7 @@ Our main focus is Gradle build configuration, both applications' details are of 
 
 The article uses Groovy DSL for Gradle scripts, though this approach works perfectly fine with Kotlin DSL as well. 
 
-Both versions, Groovy and Kotlin DSL, of the whole working example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).
+Both versions, Groovy and Kotlin DSL, of the whole working example [can be found on GitHub](https://github.com/jameswettenhall/java-npm-gradle-integration-example).
 
 ## Goal
 
@@ -22,12 +22,9 @@ The NPM project should be built using Gradle, without any direct interaction wit
 
 The Java project is built with Gradle in a regular way, no fancy things here.
 
-The NPM build is done using [gradle-node-plugin](https://github.com/srs/gradle-node-plugin), which integrates NodeJS-based projects with Gradle without requiring to have NodeJS installed on the system.
+The NPM build is done using [gradle-node-plugin](https://github.com/node-gradle/gradle-node-plugin), which integrates NodeJS-based projects with Gradle without requiring to have NodeJS installed on the system.
 
 Output of the NPM build is packaged into a JAR file and added as a regular dependency to the Java project.
-
-### Digression - _gradle-node-plugin_
-During work on this article an actively developed [fork of gradle-node-plugin](https://github.com/node-gradle/gradle-node-plugin) has appeared. It's a good news since the original plugin seemed abandoned. However, due to the early phase of the fork development, we decided to stick with the [original plugin](https://github.com/srs/gradle-node-plugin), eventually upgrading in the future.
 
 ## Initial setup
 
@@ -44,7 +41,7 @@ defaultTasks 'build'
 
 wrapper {
     description "Regenerates the Gradle Wrapper files"
-    gradleVersion = '5.0'
+    gradleVersion = '7.6.4'
     distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 ```
@@ -100,32 +97,33 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        gradlePluginPortal()
     }
 
     dependencies {
-        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+        classpath 'com.github.node-gradle:gradle-node-plugin:7.0.2'
     }
 }
 
 apply plugin: 'base'
-apply plugin: 'com.moowork.node' // gradle-node-plugin
+apply plugin: 'com.github.node-gradle.node' // gradle-node-plugin
 ```
 
 Below add configuration for _gradle-node-plugin_ declaring the versions of npm/NodeJS to be used. The `download` flag is crucial here as it decides about downloading npm/NodeJS by the plugin or using the ones installed in the system.
 ```groovy
 node {
     /* gradle-node-plugin configuration
-       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+       https://github.com/node-gradle/gradle-node-plugin/blob/main/docs/usage.md
 
        Task name pattern:
        ./gradlew npm_<command> Executes an NPM command.
     */
 
     // Version of node to use.
-    version = '10.14.1'
+    version = '20.11.1'
 
     // Version of npm to use.
-    npmVersion = '6.4.1'
+    npmVersion = '10.4.0'
 
     // If true, it will download node using above parameters.
     // If false, it will try to use globally installed node.
@@ -251,6 +249,10 @@ Last but not the least - check if all of this works. Start the Java application 
 ```
 java -jar java-app/build/libs/java-app-0.0.1-SNAPSHOT.jar
 ```
+or alternatively with:
+```
+./gradlew bootRun
+```
 and open `http://localhost:8080/` in your browser. You should see the React app welcome page.
 
 ## What about tests?
@@ -271,7 +273,7 @@ task test(type: NpmTask) {
     dependsOn assemble
 
     // force Jest test runner to execute tests once and finish the process instead of starting watch mode
-    environment CI: 'true'
+    environment = ['CI': 'true']
 
     args = ['run', 'test']
     
@@ -315,4 +317,4 @@ to be served as a static asset.
 
 Such setup can be useful for simple frontend-backend stacks when there is no need to serve frontend application from a separate server.
 
-Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).  
+Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/jameswettenhall/java-npm-gradle-integration-example).
