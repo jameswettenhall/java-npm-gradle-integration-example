@@ -10,7 +10,7 @@ Our main focus is Gradle build configuration, both applications' details are of 
 
 The article uses Groovy DSL for Gradle scripts, though this approach works perfectly fine with Kotlin DSL as well. 
 
-Both versions, Groovy and Kotlin DSL, of the whole working example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).
+Both versions, Groovy and Kotlin DSL, of the whole working example [can be found on GitHub](https://github.com/jameswettenhall/java-npm-gradle-integration-example).
 
 ## Goal
 
@@ -113,7 +113,7 @@ Below add configuration for _gradle-node-plugin_ declaring the versions of npm/N
 ```groovy
 node {
     /* gradle-node-plugin configuration
-       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+       https://github.com/node-gradle/gradle-node-plugin/blob/main/docs/usage.md
 
        Task name pattern:
        ./gradlew npm_<command> Executes an NPM command.
@@ -313,4 +313,4 @@ to be served as a static asset.
 
 Such setup can be useful for simple frontend-backend stacks when there is no need to serve frontend application from a separate server.
 
-Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).
+Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/jameswettenhall/java-npm-gradle-integration-example).
