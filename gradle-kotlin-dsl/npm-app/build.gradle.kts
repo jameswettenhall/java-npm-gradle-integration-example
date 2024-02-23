@@ -1,5 +1,5 @@
-import com.moowork.gradle.node.NodeExtension
-import com.moowork.gradle.node.npm.NpmTask
+import com.github.gradle.node.NodeExtension
+import com.github.gradle.node.npm.task.NpmTask
 
 buildscript {
     repositories {
@@ -8,32 +8,32 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.moowork.gradle:gradle-node-plugin:1.2.0")
+        classpath("com.github.node-gradle:gradle-node-plugin:7.0.2")
     }
 }
 
 plugins {
     base
-    id("com.moowork.node") version "1.2.0" // gradle-node-plugin
+    id("com.github.node-gradle.node") version "7.0.2" // gradle-node-plugin
 }
 
 node {
     /* gradle-node-plugin configuration
-       https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
+       https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/usage.md
 
        Task name pattern:
        ./gradlew npm_<command> Executes an NPM command.
     */
 
     // Version of node to use.
-    version = "10.14.1"
+    version.set("20.11.1")
 
     // Version of npm to use.
-    npmVersion = "6.4.1"
+    npmVersion.set("10.4.0")
 
     // If true, it will download node using above parameters.
     // If false, it will try to use globally installed node.
-    download = true
+    download.set(true)
 }
 
 tasks.named<NpmTask>("npm_run_build") {
@@ -84,9 +84,9 @@ val test by tasks.registering(NpmTask::class) {
     dependsOn("assemble")
 
     // force Jest test runner to execute tests once and finish the process instead of starting watch mode
-    setEnvironment(mapOf("CI" to "true"))
+    environment.set(mapOf("CI" to "true"))
 
-    setArgs(listOf("run", "test"))
+    args.set(listOf("run", "test"))
 
     inputs.files(fileTree("src"))
     inputs.file("package.json")
