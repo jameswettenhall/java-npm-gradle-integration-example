@@ -4,11 +4,10 @@ buildscript {
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
-        gradlePluginPortal()
     }
 
     dependencies {
-        classpath 'com.github.node-gradle:gradle-node-plugin:3.1.1'
+        classpath 'com.github.node-gradle:gradle-node-plugin:7.0.2'
     }
 }
 
