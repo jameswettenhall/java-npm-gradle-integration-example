@@ -26,9 +26,6 @@ The NPM build is done using [gradle-node-plugin](https://github.com/srs/gradle-n
 
 Output of the NPM build is packaged into a JAR file and added as a regular dependency to the Java project.
 
-### Digression - _gradle-node-plugin_
-During work on this article an actively developed [fork of gradle-node-plugin](https://github.com/node-gradle/gradle-node-plugin) has appeared. It's a good news since the original plugin seemed abandoned. However, due to the early phase of the fork development, we decided to stick with the [original plugin](https://github.com/srs/gradle-node-plugin), eventually upgrading in the future.
-
 ## Initial setup
 
 Create a root Gradle project, lets call it `java-npm-gradle-integration-example`, then `java-app` and `npm-app` as it's subprojects.
@@ -44,7 +41,7 @@ defaultTasks 'build'
 
 wrapper {
     description "Regenerates the Gradle Wrapper files"
-    gradleVersion = '5.0'
+    gradleVersion = '7.6.4'
     distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 ```
@@ -100,10 +97,11 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        gradlePluginPortal()
     }
 
     dependencies {
-        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+        classpath 'com.github.node-gradle:gradle-node-plugin:3.1.1'
     }
 }
 
@@ -122,10 +120,10 @@ node {
     */
 
     // Version of node to use.
-    version = '10.14.1'
+    version = '20.11.1'
 
     // Version of npm to use.
-    npmVersion = '6.4.1'
+    npmVersion = '10.4.0'
 
     // If true, it will download node using above parameters.
     // If false, it will try to use globally installed node.
@@ -271,7 +269,7 @@ task test(type: NpmTask) {
     dependsOn assemble
 
     // force Jest test runner to execute tests once and finish the process instead of starting watch mode
-    environment CI: 'true'
+    environment = ['CI': 'true']
 
     args = ['run', 'test']
     
@@ -315,4 +313,4 @@ to be served as a static asset.
 
 Such setup can be useful for simple frontend-backend stacks when there is no need to serve frontend application from a separate server.
 
-Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).  
+Full implementations in both, **Groovy and Kotlin DSL**, of this example [can be found on GitHub](https://github.com/xword/java-npm-gradle-integration-example).
