@@ -22,7 +22,7 @@ The NPM project should be built using Gradle, without any direct interaction wit
 
 The Java project is built with Gradle in a regular way, no fancy things here.
 
-The NPM build is done using [gradle-node-plugin](https://github.com/srs/gradle-node-plugin), which integrates NodeJS-based projects with Gradle without requiring to have NodeJS installed on the system.
+The NPM build is done using [gradle-node-plugin](https://github.com/node-gradle/gradle-node-plugin), which integrates NodeJS-based projects with Gradle without requiring to have NodeJS installed on the system.
 
 Output of the NPM build is packaged into a JAR file and added as a regular dependency to the Java project.
 
@@ -101,7 +101,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.node-gradle:gradle-node-plugin:3.1.1'
+        classpath 'com.github.node-gradle:gradle-node-plugin:7.0.2'
     }
 }
 
