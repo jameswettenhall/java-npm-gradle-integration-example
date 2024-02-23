@@ -106,7 +106,7 @@ buildscript {
 }
 
 apply plugin: 'base'
-apply plugin: 'com.moowork.node' // gradle-node-plugin
+apply plugin: 'com.github.node-gradle.node' // gradle-node-plugin
 ```
 
 Below add configuration for _gradle-node-plugin_ declaring the versions of npm/NodeJS to be used. The `download` flag is crucial here as it decides about downloading npm/NodeJS by the plugin or using the ones installed in the system.
