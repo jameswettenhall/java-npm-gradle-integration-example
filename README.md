@@ -249,6 +249,10 @@ Last but not the least - check if all of this works. Start the Java application 
 ```
 java -jar java-app/build/libs/java-app-0.0.1-SNAPSHOT.jar
 ```
+or alternatively with:
+```
+./gradlew bootRun
+```
 and open `http://localhost:8080/` in your browser. You should see the React app welcome page.
 
 ## What about tests?
