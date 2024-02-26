@@ -1,4 +1,4 @@
-name: Run Gradle on every push
+name: Gradle Build for Groovy DSL
 on: push
 jobs:
   gradle:
