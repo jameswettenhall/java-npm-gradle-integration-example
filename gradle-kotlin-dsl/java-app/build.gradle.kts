@@ -31,7 +31,14 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("junit:junit:4.13")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 
     runtimeOnly(project(path = ":npm-app", configuration = "npmResources"))
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging({
+        events("passed", "skipped", "failed")
+    })
 }
