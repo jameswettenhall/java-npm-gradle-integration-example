@@ -52,9 +52,9 @@ tasks.named<NpmTask>("npm_run_build") {
 // pack output of the build into JAR file
 val packageNpmApp by tasks.registering(Jar::class) {
     dependsOn("npm_run_build")
-    baseName = "npm-app"
-    extension = "jar"
-    destinationDir = file("${projectDir}/build_packageNpmApp")
+    archiveBaseName.set("npm-app")
+    archiveExtension.set("jar")
+    destinationDirectory.set(file("${projectDir}/build_packageNpmApp"))
     from("build") {
         // optional path under which output will be visible in Java classpath, e.g. static resources path
         into("static")
