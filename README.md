@@ -12,6 +12,8 @@ The article uses Groovy DSL for Gradle scripts, though this approach works perfe
 
 Both versions, Groovy and Kotlin DSL, of the whole working example [can be found on GitHub](https://github.com/jameswettenhall/java-npm-gradle-integration-example).
 
+When running the Groovy DSL example from the GitHub repository, note that the directory referred to as `java-npm-gradle-integration-example/` in this article is equivalent to `java-npm-gradle-integration-example/gradle-groovy-dsl/` in the GitHub repository.  The `gradle-groovy-dsl/` subdirectory is used for Gradle configuration files (e.g. `build.gradle`) and for running `./gradlew`.
+
 ## Goal
 
 We want to serve the JavaScript frontend application as static resources from the Java backend application. The full production package, i.e. a fat JAR containing all the resources, should be automatically created via Gradle.
