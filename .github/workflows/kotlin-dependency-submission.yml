@@ -1,0 +1,22 @@
+name: Kotlin Dependency Submission
+
+on: [ push ]
+
+permissions:
+  contents: write
+
+jobs:
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 17
+    - name: Checkout sources
+      uses: actions/checkout@v4
+    - name: Generate and submit dependency graph
+      uses: gradle/actions/dependency-submission@v3
+      with:
+        # The gradle project is not in the root of the repository.
+        build-root-directory: gradle-kotlin-dsl
