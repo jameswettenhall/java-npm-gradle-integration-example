@@ -1,17 +1,6 @@
 import com.github.gradle.node.NodeExtension
 import com.github.gradle.node.npm.task.NpmTask
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven(url = "https://plugins.gradle.org/m2/")
-    }
-
-    dependencies {
-        classpath("com.github.node-gradle:gradle-node-plugin:7.0.2")
-    }
-}
-
 plugins {
     base
     id("com.github.node-gradle.node") version "7.0.2" // gradle-node-plugin

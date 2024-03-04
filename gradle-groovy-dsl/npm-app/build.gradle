@@ -1,18 +1,8 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-    }
 
-    dependencies {
-        classpath 'com.github.node-gradle:gradle-node-plugin:7.0.2'
-    }
+plugins {
+        id 'base'
+        id 'com.github.node-gradle.node' version '7.0.2'
 }
-
-apply plugin: 'base'
-apply plugin: 'com.github.node-gradle.node' // gradle-node-plugin
 
 node {
     /* gradle-node-plugin configuration
