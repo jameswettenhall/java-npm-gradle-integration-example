@@ -172,9 +172,9 @@ At first define task packing results of the build into JAR file:
 ```groovy
 task packageNpmApp(type: Zip) {
     dependsOn npm_run_build
-    baseName 'npm-app'
-    extension 'jar'
-    destinationDir file("${projectDir}/build_packageNpmApp")
+    archiveBaseName = 'npm-app'
+    archiveExtension = 'jar'
+    destinationDirectory = file("${projectDir}/build_packageNpmApp")
     from('build') {
         // optional path under which output will be visible in Java classpath, e.g. static resources path
         into 'static' 
