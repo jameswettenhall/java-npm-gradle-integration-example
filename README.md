@@ -93,22 +93,10 @@ This is the essential part consisting of converting `npm-app` to Gradle subproje
 
 Create `npm-app/build.gradle` file with the following contents, already including _gradle-node-plugin_ dependency.
 ```groovy
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath 'com.github.node-gradle:gradle-node-plugin:7.0.2'
-    }
+plugins {
+    id 'base'
+    id 'com.github.node-gradle.node' version '7.0.2'
 }
-
-apply plugin: 'base'
-apply plugin: 'com.github.node-gradle.node' // gradle-node-plugin
 ```
 
 Below add configuration for _gradle-node-plugin_ declaring the versions of npm/NodeJS to be used. The `download` flag is crucial here as it decides about downloading npm/NodeJS by the plugin or using the ones installed in the system.
