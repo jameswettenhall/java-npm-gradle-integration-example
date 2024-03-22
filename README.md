@@ -73,7 +73,7 @@ Generate a Spring Boot application using [Spring Initializr](https://start.sprin
 
 ### Create `npm-app` project
 
-Generate `npm-app` React application using [create-react-app](https://github.com/facebook/create-react-app) under `java-npm-gradle-integration-example` directory.
+Generate `npm-app` React application using [vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) under `java-npm-gradle-integration-example` directory.
 
 ## Adapt `java-app` to be Gradle subproject of `java-npm-gradle-integration-example`
 
@@ -253,8 +253,7 @@ In order to run JavaScript tests during the Gradle build we need to create a tas
 
 Here it's important to make sure the process started by such task exits with a proper status code, i.e. `0` for success 
 and `non-0` for failure - we don't want our Gradle build pass smoothly ignoring JavaScript tests blowing up.
-In our example it's enough to set `CI` environment variable - the `Jest` testing platform (default for create-react-app) 
-is going to behave correctly.
+In our example it's enough to set `CI` environment variable - the `vitest` testing platform is going to behave correctly.
 
 ```groovy
 String testsExecutedMarkerName = "${projectDir}/.tests.executed"
